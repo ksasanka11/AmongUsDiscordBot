@@ -11,7 +11,7 @@ GUILD = os.getenv('DISCORD_GUILD')
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
-dead_members = []
+dead_members = set()
 
 @client.event
 async def on_ready():
@@ -27,6 +27,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    global dead_members
+
     if message.author == client.user:
         return
     if message.content.startswith('.'):
@@ -62,7 +64,7 @@ async def on_message(message):
 
         if message.content.startswith('.dead'):
             member = message.author
-            dead_members.append(member)
+            dead_members.add(member)
             await member.edit(mute=True)
             await message.channel.send(f"{member.name} has declared themselves dead!!")
 
@@ -78,14 +80,14 @@ async def on_message(message):
                         invalid_user = discord.utils.get(message.guild.members, id=int(user[3:-1]))
                         await message.channel.send(f"{invalid_user.name} is not connected to voice channel")
                         return
-                    dead_members.append(member)
+                    dead_members.add(member)
                     await member.edit(mute=True)
                 dead_members_str = '\n - '.join([member.name for member in dead_members])
                 await message.channel.send(f"Members dead in this game:\n - {dead_members_str}")
 
         if message.content.startswith('.newgame'):
             for member in connected_members:
-                dead_members = []
+                dead_members = {}
                 await member.edit(mute=False)
             await message.channel.send("A new game has started. All members unmuted.")
 
