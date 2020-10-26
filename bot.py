@@ -1,3 +1,4 @@
+
 import os
 
 import discord
@@ -48,6 +49,12 @@ async def on_message(message):
             await message.channel.send("All living members unmuted")
 
         if message.content.startswith('.dead'):
+            member = message.author
+            dead_members.append(member)
+            await member.edit(mute=True)
+            await message.channel.send(f"{member.name} has declared himself dead!!")
+
+        if message.content.startswith('.kill'):
             users = message.content.split(' ')[1:]
             if len(users) == 0:
                 await message.channel.send("Mention atleast a single connected user.")
