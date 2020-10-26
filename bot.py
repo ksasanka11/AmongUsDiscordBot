@@ -85,7 +85,8 @@ async def on_message(message):
 
         if message.content.startswith('.newgame'):
             for member in connected_members:
-                    await member.edit(mute=False)
+                dead_members = []
+                await member.edit(mute=False)
             await message.channel.send("A new game has started. All members unmuted.")
 
 client.run(TOKEN)
