@@ -26,8 +26,7 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-
-    if message.content.startswith('-'):
+    if message.content.startswith('.'):
         # print(message)
         if message.author.voice and message.author.voice.channel:
             channel = message.author.voice.channel
@@ -36,19 +35,19 @@ async def on_message(message):
             return
 
         connected_members = channel.members
-        # await message.channel.send('Welcome to Among us bot!!')
-        if message.content.startswith('-mute'):
+        
+        if message.content.startswith('.mute'):
             for member in connected_members:
                 await member.edit(mute=True)
             await message.channel.send("All members are muted")
 
-        if message.content.startswith('-unmute'):
+        if message.content.startswith('.unmute'):
             for member in connected_members:
                 if member not in dead_members:
                     await member.edit(mute=False)
             await message.channel.send("All living members unmuted")
 
-        if message.content.startswith('-dead'):
+        if message.content.startswith('.dead'):
             users = message.content.split(' ')[1:]
             if len(users) == 0:
                 await message.channel.send("Mention atleast a single connected user.")
@@ -65,7 +64,7 @@ async def on_message(message):
                 dead_members_str = '\n - '.join([member.name for member in dead_members])
                 await message.channel.send(f"Members dead in this game:\n - {dead_members_str}")
 
-        if message.content.startswith('-newgame'):
+        if message.content.startswith('.newgame'):
             for member in connected_members:
                     await member.edit(mute=False)
             await message.channel.send("A new game has started. All members unmuted.")
