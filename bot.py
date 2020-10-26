@@ -36,7 +36,17 @@ async def on_message(message):
             return
 
         connected_members = channel.members
-        
+        if message.content.startswith('.help'):
+            help_message = """```
+# Commands:
+.dead                       | Do this if you are dead, so you stay muted until you win or lose!
+.kill @User1 @User2         | Alternative to .dead 
+.mute                       | Mutes everyone that is currently not dead
+.unmute                     | Unmutes everyone that is currently not dead
+.newgame                    | Unmutes everyone including the dead (This is used when you win or lose!)
+```"""
+            await message.channel.send(help_message)
+
         if message.content.startswith('.mute'):
             for member in connected_members:
                 await member.edit(mute=True)
