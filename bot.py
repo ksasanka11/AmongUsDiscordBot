@@ -15,6 +15,8 @@ dead_members = []
 
 @client.event
 async def on_ready():
+    await client.change_presence(activity=discord.Game(type=discord.ActivityType.playing, name="to .help"))
+    # client.user.setActivity("Type **.help** to get all commands"); 
     print('We have logged in as {0.user}'.format(client))
     for guild in client.guilds:
         if guild.name == GUILD:
