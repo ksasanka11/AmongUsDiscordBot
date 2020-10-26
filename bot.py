@@ -62,7 +62,7 @@ async def on_message(message):
             member = message.author
             dead_members.append(member)
             await member.edit(mute=True)
-            await message.channel.send(f"{member.name} has declared himself dead!!")
+            await message.channel.send(f"{member.name} has declared themselves dead!!")
 
         if message.content.startswith('.kill'):
             users = message.content.split(' ')[1:]
