@@ -43,7 +43,7 @@ async def on_message(message):
 .kill @User1 @User2         | Alternative to .dead 
 .mute                       | Mutes everyone that is currently not dead
 .unmute                     | Unmutes everyone that is currently not dead
-.newgame                    | Unmutes everyone including the dead (This is used when you win or lose!)
+.newgame                    | Unmutes everyone including the dead.
 ```"""
             await message.channel.send(help_message)
 
