@@ -74,8 +74,8 @@ async def on_message(message):
                 await message.channel.send("Mention atleast a single connected user.")
             else:
                 for user in users:
-                    member = discord.utils.get(connected_members, id=int(user[3:-1]))
-                    # print(member)
+                    import re
+                    member = discord.utils.get(connected_members, id=int(re.search(r'\d+', user).group()))
                     if member is None:
                         invalid_user = discord.utils.get(message.guild.members, id=int(user[3:-1]))
                         await message.channel.send(f"{invalid_user.name} is not connected to voice channel")
