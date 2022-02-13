@@ -1,6 +1,7 @@
 # Among Us Discord Bot
 
 This is an Among Us Discord bot that mutes and unmutes players with a single command, without anyone needing to mute themselves manually.
+(Cloned from https://github.com/alpharaoh/AmongUsBot)
 
 ## Installation and setup
 
